@@ -30,3 +30,15 @@ pipeline {
         }
     }
 }
+
+       stage("Destroy Infrastructure") {
+            steps {
+                script {
+                    dir('/var/lib/jenkins/workspace/EKSBuildPipeline3') {
+                        sh "terraform destroy -auto-approve"
+                    }
+                }
+            }
+        }
+    }
+}
