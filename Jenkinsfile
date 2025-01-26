@@ -28,10 +28,8 @@ pipeline {
                 }
             }
         }
-    }
-}
-
-       stage("Destroy Infrastructure") {
+    
+stage("Destroy Infrastructure") {
             steps {
                 script {
                     dir('/var/lib/jenkins/workspace/EKSBuildPipeline3') {
