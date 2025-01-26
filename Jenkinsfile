@@ -10,7 +10,7 @@ pipeline {
         stage("Create an EKS Cluster") {
             steps {
                 script {
-                    dir('terraform') {
+                    dir('/var/lib/jenkins/workspace/terraform2') {
                         sh "terraform init"
                         sh "terraform apply -auto-approve"
                     }
@@ -24,6 +24,16 @@ pipeline {
                         sh "aws eks update-kubeconfig --name my-eks-cluster"
                         sh "kubectl apply -f nginx-deployment.yaml"
                         sh "kubectl apply -f nginx-service.yaml"
+                    }
+                }
+            }
+        }
+    
+stage("Destroy Infrastructure") {
+            steps {
+                script {
+                    dir('/var/lib/jenkins/workspace/EKSBuildPipeline3') {
+                        sh "terraform destroy -auto-approve"
                     }
                 }
             }
